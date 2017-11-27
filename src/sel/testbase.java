@@ -1,10 +1,14 @@
 package sel;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,6 +23,7 @@ import java.io.FileNotFoundException;
 public class testbase {
 	
 	public static  String prop_username,prop_password;
+	
 
 	//static Properties properties;
 	
@@ -44,7 +49,25 @@ public class testbase {
 		System.out.println("HI");
 		
 	}
-	/*		properties = new Properties();
+	public void readexcel() throws Exception 
+	{
+		File fil = new File("C:\\Users\\Manjit\\workspace\\sel\\Test Data.xlsx");
+		FileInputStream file = new FileInputStream(fil);
+		XSSFWorkbook xcel= new XSSFWorkbook(file);
+		XSSFSheet sheet = xcel.getSheetAt(0);
+		
+		ArrayList <String> unamelist = new ArrayList<>();
+		
+		for(int i=0;i<5;i++)
+		{
+			String  uname = sheet.getRow(i).getCell(i).getStringCellValue();
+			unamelist.add(uname);
+		}
+		
+		
+	}
+	
+		/*		properties = new Properties();
 		File f = new File(System.getProperty("user.dir")+"\\src\\prop\\data.properties");
 // System is class and get property is static method
 		FileReader obj = new FileReader(f); 

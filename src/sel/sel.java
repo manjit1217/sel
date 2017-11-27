@@ -1,13 +1,19 @@
 package sel;
+import java.awt.Desktop.Action;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
+
+import net.sourceforge.htmlunit.corejs.javascript.ast.AstNode;
 public class sel extends testbase {
 
  
@@ -17,15 +23,18 @@ public class sel extends testbase {
         // declaration and instantiation of objects/variables
     	 
     	System.setProperty("webdriver.gecko.driver","C:\\Users\\Manjit\\Downloads\\geckodriver-v0.13.0-win64\\geckodriver.exe");//geckodriver path
-    	WebDriver driver = new FirefoxDriver();
+    	//WebDriver driver = new FirefoxDriver();
+       
         
-    	String baseUrl = "http://newtours.demoaut.com";
+        String baseUrl = "http://newtours.demoaut.com";
         String expectedTitle = "Welcome: Mercury Tours";
         String actualTitle = "";
         
+       // System.setProperty("webdriver.chrome.driver", "C:\\Users\\Manjit\\Downloads\\Compressed\\chromedriver_win32\\chromedriver.exe");
+        //WebDriver driver = new ChromeDriver();      
+        WebDriver driver = new FirefoxDriver();
+        
       
-        
-        
        //List<WebElement> tagname= driver.findElements(By.tagName("input"));
         // launch Fire fox and direct it to the Base URL
         driver.get(baseUrl);
@@ -72,10 +81,10 @@ public class sel extends testbase {
         Boolean b = type.isSelected();
         System.out.println("trip button"+b);*/
         //Dropdown value is selecting
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+       // driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
  WebElement element = driver.findElement(By.xpath("//*[@name='findFlights']"));
  
-       testbase.explicitywait(element);
+      // testbase.explicitywait(element);
        // driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
        
       // driver.manage().timeouts().
@@ -105,7 +114,13 @@ public class sel extends testbase {
        WebElement contune = driver.findElement(By.name("findFlights"));
        contune.click();
        
-       
+      WebElement mouse = driver.findElement(By.id(""));
+       Actions act = new Actions(driver);
+       act.moveToElement(mouse);
+       act.perform();
+       act.sendKeys(Keys.ENTER);
+      
+  act.dragAndDrop(contune, mouse);
   
        
         //close Fire fox
